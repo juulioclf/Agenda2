@@ -2,9 +2,17 @@ from django.contrib import admin
 from .models import Category, Contact
 
 
-class ContatoAdmin(admin.ModelAdmin):
-    ...
+@admin.register(Contact)
+class ContactAdmin(admin.ModelAdmin):
+    list_display = ("name", "phone", "email", "category", "show")
+    list_per_page = 4
 
 
-admin.site.register(Category)
-admin.site.register(Contact)
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    pass
+
+
+
+
+
