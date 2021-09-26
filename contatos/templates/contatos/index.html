@@ -1,26 +1,38 @@
 {% extends 'base.html' %}
 
 {% block 'conteudo' %}
-<h1 class="mt-5">Minha agenda</h1>
+<h1 class="mt-5">My Contacts</h1>
 
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Nome</th>
-              <th>Sobrenome</th>
-              <th>Telefone</th>
-              <th>Categoria</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                <a href="#"> João</a>
-              </td>
-              <td>Miranda</td>
-              <td>35 9 5555-5555</td>
-              <td>Família</td>
-            </tr>
-          </tbody>
-        </table>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Telefone</th>
+      <th>Categoria</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for contact in contacts%}
+  {% if contact.show %}
+    <tr>
+      <td>
+        <a href="{% url 'search_contact' contact.id %}"> {{ contact.name }} </a>
+      </td>
+      <td>{{ contact.phone }}</td>
+      <td>{{ contact.category }}</td>
+    </tr>
+  {% endif %}
+  {% endfor %}
+  </tbody>
+</table>
+
+<nav aria-label="Page navigation example">
+  {% for page in contacts.paginator.page_range %}
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" href="?p={{pagina}}">{{ pagina }}</a></li>
+    {% endfor %}
+  </ul>
+</nav>
+
+
 {% endblock %}
